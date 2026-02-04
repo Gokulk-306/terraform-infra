@@ -12,9 +12,11 @@ provider "aws" {
   
   default_tags {
     tags = {
-      Environment = "dev"
-      Project     = "webapp"
+      Environment = var.environment
+      Project     = var.project_name
       ManagedBy   = "terraform"
+      Owner       = "DevOps Team"
+      CostCenter  = "Engineering"
     }
   }
 }

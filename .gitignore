@@ -5,6 +5,12 @@
 .terraform/
 .terraform.lock.hcl
 
+# SSH Keys - NEVER commit these!
+*.pem
+*.key
+*.ppk
+id_rsa*
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -20,6 +26,3 @@ Thumbs.db
 
 # Backup files
 *.backup
-
-#pem keys
-*.pem

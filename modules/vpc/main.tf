@@ -47,24 +47,21 @@ resource "aws_subnet" "private" {
   }
 }
 
-# NAT Gateway
+# NAT Gateway (Single for cost optimization)
 resource "aws_eip" "nat" {
-  for_each = var.public_subnets
-  domain   = "vpc"
+  domain = "vpc"
 
   tags = {
-    Name = "${var.project_name}-nat-eip-${each.key}"
+    Name = "${var.project_name}-nat-eip"
   }
 }
 
 resource "aws_nat_gateway" "main" {
-  for_each = var.public_subnets
-
-  allocation_id = aws_eip.nat[each.key].id
-  subnet_id     = aws_subnet.public[each.key].id
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public["1"].id
 
   tags = {
-    Name = "${var.project_name}-nat-${each.key}"
+    Name = "${var.project_name}-nat"
   }
 
   depends_on = [aws_internet_gateway.main]
@@ -91,7 +88,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.main[each.key].id
+    nat_gateway_id = aws_nat_gateway.main.id
   }
 
   tags = {

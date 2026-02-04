@@ -7,7 +7,7 @@ variable "project_name" {
 variable "environment" {
   description = "Environment name"
   type        = string
-  default     = "dev"
+  default     = "prod"
 }
 
 variable "vpc_cidr" {
@@ -34,17 +34,17 @@ variable "alert_email" {
 variable "min_size" {
   description = "Minimum number of instances in ASG"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "max_size" {
   description = "Maximum number of instances in ASG"
   type        = number
-  default     = 4
+  default     = 8
 }
 
 variable "desired_capacity" {
   description = "Desired number of instances in ASG"
   type        = number
-  default     = 2
+  default     = 3
 }
